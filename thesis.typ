@@ -132,11 +132,30 @@
 #counter(page).update(1)
 #show: fix-indent()
 
-//#set heading(numbering: "1.1.1")
+
+#set heading(numbering: "1.1.1")
+#counter(heading).update(0)
+#show heading: it => block(width: 100%)[
+  #set text(12pt)
+  #let selector = selector(heading).before(here())
+  #let level = counter(selector)
+  #block([#level.display()#h(1em)#it.body])
+]
+
+#show heading.where(
+  level: 1
+): it => {
+  set align(center);
+  set text(12pt)
+  set text(12pt)
+  let selector = selector(heading).before(here())
+  let level = counter(selector)
+  pagebreak()
+  block([#level.display().#h(1em)#it.body])
+}
 
 = TITLE OF CHAPTER 1 
 #lorem(100)
-da
 
 #figure(
   board(starting-position),
@@ -159,4 +178,7 @@ $
 #lorem(100)
 
 === Section 1.2.1
+#lorem(100)
+
+= TITLE OF CHAPTER 2
 #lorem(100)
